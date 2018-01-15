@@ -14,6 +14,7 @@ RUN apt update && \
       jq \
       python-pip \
       netcat \
+      unzip \
       inetutils-ping && \
     pip install awscli && \
     mkdir -p .aws && touch .aws/config && touch .aws/credentials && \
@@ -28,5 +29,12 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s
 RUN curl -LO https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64 && \
     chmod +x kops-linux-amd64 && \
     mv kops-linux-amd64 /usr/local/bin/kops
+
+# Install terraform
+RUN curl -LO https://releases.hashicorp.com/terraform/0.11.2/terraform_0.11.2_linux_amd64.zip && \
+    unzip terraform_0.11.2_linux_amd64.zip && \
+    rm -rf terraform_0.11.2_linux_amd64.zip && \
+    chmod +x terraform && \
+    mv terraform /usr/local/bin/
 
 CMD /bin/bash
