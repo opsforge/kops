@@ -4,7 +4,9 @@ FROM ubuntu:18.04
 
 MAINTAINER opsforge.io
 LABEL name="kops"
-LABEL version="1.0.0"
+LABEL version="1.1.0"
+
+ENV TFVER="0.11.8"
 
 RUN apt update && \
     apt install -y \
@@ -31,9 +33,9 @@ RUN curl -LO https://github.com/kubernetes/kops/releases/download/$(curl -s http
     mv kops-linux-amd64 /usr/local/bin/kops
 
 # Install terraform
-RUN curl -LO https://releases.hashicorp.com/terraform/0.11.2/terraform_0.11.2_linux_amd64.zip && \
-    unzip terraform_0.11.2_linux_amd64.zip && \
-    rm -rf terraform_0.11.2_linux_amd64.zip && \
+RUN curl -LO https://releases.hashicorp.com/terraform/${TFVER}/terraform_${TFVER}_linux_amd64.zip && \
+    unzip terraform_${TFVER}_linux_amd64.zip && \
+    rm -rf terraform_${TFVER}_linux_amd64.zip && \
     chmod +x terraform && \
     mv terraform /usr/local/bin/
 
