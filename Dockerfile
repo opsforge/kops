@@ -4,9 +4,9 @@ FROM ubuntu:18.04
 
 MAINTAINER opsforge.io
 LABEL name="kops"
-LABEL version="1.2.0"
+LABEL version="1.2.1"
 
-ENV TFVER="0.11.10"
+ENV TFVER="0.11.11"
 
 RUN apt update && \
     apt install -y \
